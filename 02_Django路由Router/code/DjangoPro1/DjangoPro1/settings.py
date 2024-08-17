@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'APP.apps.AppConfig',
     'APP',
 ]
 
@@ -76,12 +75,18 @@ WSGI_APPLICATION = 'DjangoPro1.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# 数据库
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'jy_test',
+        'USER': 'root',
+        'PASSWORD': 'gong-Hui*0610~20DgqL',
+        'HOST': '39.101.182.138',
+        'PORT': '3306',
     }
 }
+
 
 
 # Password validation
