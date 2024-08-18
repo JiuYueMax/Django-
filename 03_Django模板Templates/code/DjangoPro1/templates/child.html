@@ -1,0 +1,31 @@
+
+{# 继承父模板 #}
+{% extends 'block.html' %}
+
+{% block head %}
+    <div>
+        <button>Head</button>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    {#  默认情况下，子模板会覆盖父模板的内容  #}
+    {# 如果想将父模板中block的内容继承，则需要使用block.super #}
+    {{ block.super }}
+
+    <div>
+        <button>Content</button>
+    </div>
+{% endblock %}
+
+{% block foot %}
+    <div>
+        <button>Foot</button>
+    </div>
+
+    {#  导入其他模板文件  #}
+    {% include 'child_include.html' %}
+
+{% endblock %}
+

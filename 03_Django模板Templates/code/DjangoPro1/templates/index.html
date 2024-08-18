@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Django模板</title>
+</head>
+<body>
+    <h2>Django模板</h2>
+    <hr>
+
+    {#  单行注释  #}
+    {% comment %}
+        多行注释
+        多行注释
+    {% endcomment %}
+
+{#   变量     #}
+    <p>name: {{ name }}</p>
+    <p>age: {{ age }}</p>
+
+    <p>likes: {{ likes }}</p>
+    <p>likes.1: {{ likes.1 }}</p>
+
+    <p>address: {{ address }}</p>
+    <p>address.city: {{ address.city }}</p>
+
+    <hr>
+
+{#   标签     #}
+    <h3>if语句</h3>
+    <h4>if单分支</h4>
+    {% if age < 18 %}
+        <p>{{ name }} 未成年 </p>
+    {% endif %}
+
+    <h4>if双分支</h4>
+    {% if age < 18 %}
+        <p>{{ name }} 未成年 </p>
+    {% else %}
+        <p>{{ name }} 成年了！ </p>
+    {% endif %}
+
+    <h4>if多分支</h4>
+    {% if age < 18 %}
+        <p>{{ name }} 未成年 </p>
+    {% elif age < 60 %}
+        <p>{{ name }} 是壮年 </p>
+    {% else %}
+        <p>{{ name }} 老年人 </p>
+    {% endif %}
+
+    <h4>结合运算符</h4>
+    {% if age >= 18 and age < 60 %}
+        <p>{{ name }} 是壮年,风华正茂，小年轻！ </p>
+    {% endif %}
+    {% if age < 18 or age >= 60 %}
+        <p>{{ name }} 未成年或者是老年人！ </p>
+    {% endif %}
+
+    {% if 'movie' in likes %}
+        <p> {{ name }} 喜欢movie！ </p>
+    {% endif %}
+
+    <hr>
+    <h3>for循环语句</h3>
+    {% for like in likes %}
+        <p>{{ like }}</p>
+    {% endfor %}
+
+    <h4>empty</h4>
+    {% for like in likes2 %}
+        <p>{{ like }}</p>
+    {% empty %}
+        <p>likes2 为空或者不存在</p>
+    {% endfor %}
+
+    <h4>下标</h4>
+    {% for like in likes %}
+        <p>
+            counter0: {{ forloop.counter0 }},
+            counter: {{ forloop.counter }},
+            revcounter0: {{ forloop.revcounter0 }},
+            revcounter: {{ forloop.revcounter }},
+
+            {% if forloop.first %}
+                <b> - first</b>
+            {% endif %}
+
+            {% if forloop.last %}
+                <b> - last</b>
+            {% endif %}
+
+        </p>
+    {% endfor %}
+
+    <h4>循环嵌套</h4>
+    <table border="1" width="400">
+
+        {% for star in stars %}
+            <tr>
+
+                {% for s in star %}
+                    <td>
+                        {{ s }}-
+                        {{ forloop.parentloop.counter }} -
+                        {{ forloop.counter }}
+                    </td>
+                {% endfor %}
+
+            </tr>
+        {% endfor %}
+
+    </table>
+
+    <h4>过滤器</h4>
+    <p>age = {{ age }}</p>
+    <p>age|add:2 = {{ age|add:2  }}</p>
+    <p>age|add:-2 = {{ age|add:-2  }}</p>
+
+    <p>name = {{ name }}</p>
+    <p>name|first|upper = {{ name|first|upper }}</p>
+    <p>name|last|lower = {{ name|last|lower }}</p>
+    <p>name|title = {{ name|title }}</p>
+    <p>name|truncatechars:7 = {{ name|truncatechars:7 }}</p>
+
+    <p>likes = {{ likes }}</p>
+    <p>likes|join:'+' = {{ likes|join:'+' }}</p>
+
+    <p>likes2 = {{ likes2 }}</p>
+    <p>likes2|default:'swim' = {{ likes2|default:'swim' }}</p>
+
+    <p>dt = {{ dt }}</p>
+    <p>dt = {{ dt|date:'y-m-d' }}</p>
+    <p>dt = {{ dt|date:'Y-m-d' }}</p>
+
+    <h5>html解析</h5>
+    <p>code = {{ code }}</p>
+    <p>code|safe = {{ code|safe }}</p>
+    <p>code2 = {{ code2 }}</p>
+{#    <p>code2 = {{ code2|safe }}</p>#}
+    {% autoescape on %}
+        {{ code }}
+    {% endautoescape %}
+
+    <br><br><br><br><br>
+    <br><br><br><br><br>
+
+</body>
+</html>
