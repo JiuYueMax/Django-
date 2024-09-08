@@ -2,8 +2,8 @@ from django.db import models
 
 # 作 者
 class Author(models.Model):
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
+    first_name = models.CharField(max_length=30, verbose_name='姓')
+    last_name = models.CharField(max_length=30, verbose_name='名')
     email = models.EmailField()
     gender = models.BooleanField(default=True)
     def __str__(self):
