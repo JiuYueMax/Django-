@@ -1,3 +1,5 @@
+import json
+
 from django.shortcuts import render,HttpResponse
 from .models import *
 
@@ -23,3 +25,16 @@ def book_detail(request,book_id):
     json = {'book':book}
     print(book)
     return render(request, 'book/book_detail.html',json)
+
+def book_detail2(request):
+    book_id = request.POST.get('book_id')
+
+    # django rest framework
+
+    byte_str = request.body
+    string = byte_str.decode('utf-8')
+    type_data = json.loads(string)
+    print(type_data)
+    if book_id is None:
+        return HttpResponse('书籍ID为空')
+    return HttpResponse("成功")
